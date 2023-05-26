@@ -1,59 +1,92 @@
 import React, { useEffect, useState } from 'react';
 import ToysCard from '../ToyCard/ToysCard';
 import { Link } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const Home = () => {
-   
+    let w='w-full';
+    const [sportsCar, setsportsCar] = useState([]);
+    const [policeCar, setpoliceCar] = useState([]);
+    const [regularCar, setregularCar] = useState([]);
+    const [truck, setTruck] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/allToys/sportsCar')
+            .then(res => res.json())
+            .then(data => setsportsCar(data))
+    }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/allToys/policeCar')
+            .then(res => res.json())
+            .then(data => setpoliceCar(data))
+    }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/allToys/regularCar')
+            .then(res => res.json())
+            .then(data => setregularCar(data))
+    }, [])
+    useEffect(() => {
+        fetch('http://localhost:5000/allToys/truck')
+            .then(res => res.json())
+            .then(data => setTruck(data))
+    }, [])
+
     return (
         <div>
-            <h2 className='text-3xl font-bold'> Toy Categories</h2>
-          
+            <h2 className='text-3xl font-bold'> Shop by Categories</h2>
+            <div className='w-75 mx-auto text-center'>
+            <Tabs > 
+                <TabList>
+                    <Tab>Sports Car</Tab>
+                    <Tab>Police Car</Tab>
+                    <Tab>Regular Car</Tab>
+                    <Tab>Truck</Tab>
+                </TabList>
 
-            {/* 1st category */}
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Sports Car</h2>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary"> <Link to='/sportsCar'>See All</Link>  </button>
-                    </div>
-                </div>
+                <TabPanel>
+                    <h2> number of items: {sportsCar.length}</h2>
+                    {
+                        sportsCar.map(toy => <ToysCard
+                            key={toy._id}
+                            toy={toy}
+
+                        ></ToysCard>)
+                    }
+                </TabPanel>
+                <TabPanel>
+                    <h2> number of items:{policeCar.length}</h2>
+                    {
+                        policeCar.map(toy => <ToysCard
+                            key={toy._id}
+                            toy={toy}
+
+                        ></ToysCard>)
+                    }
+                </TabPanel>
+                <TabPanel>
+                    <h2>number of items: {regularCar.length}</h2>
+                    {
+                        regularCar.map(toy => <ToysCard
+                            key={toy._id}
+                            toy={toy}
+
+                        ></ToysCard>)
+                    }
+                </TabPanel>
+                <TabPanel>
+                    <h2> number of items:{truck.length}</h2>
+                    {
+                        truck.map(toy => <ToysCard
+                            key={toy._id}
+                            toy={toy}
+
+                        ></ToysCard>)
+                    }
+                </TabPanel>
+            </Tabs>
             </div>
 
-            {/* 2nd category */}
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Police Car</h2>
-                
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary"><Link to='/sportsCar'>See All</Link></button>
-                    </div>
-                </div>
-            </div>
-            {/* 3rd category */}
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Truck</h2>
-                
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary"><Link to='/allToys/sportsCar'>See All</Link> </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* 4th category */}
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">Regular Car</h2>
-                    
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary"><Link to='/allToys/sportsCar'>See All</Link></button>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     );
 };
