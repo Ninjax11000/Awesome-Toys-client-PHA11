@@ -8,19 +8,9 @@ import {
 import './index.css'
 import Main from './layout/Main.jsx';
 import Home from './pages/Home/Home/Home.jsx';
+import router from '../routes/Routes.jsx';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Main></Main>,
-    children:[
-      {
-        path:'/',
-        element: <Home></Home>
-      }
-    ]
-  },
-]);
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
