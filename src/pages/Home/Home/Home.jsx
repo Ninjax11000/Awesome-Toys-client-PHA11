@@ -5,7 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 const Home = () => {
-    let w='w-full';
+    
     const [sportsCar, setsportsCar] = useState([]);
     const [policeCar, setpoliceCar] = useState([]);
     const [regularCar, setregularCar] = useState([]);
