@@ -3,6 +3,7 @@ import ToysCard from '../ToyCard/ToysCard';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Banner from '../Banner/Banner';
 
 const Home = () => {
     
@@ -33,6 +34,7 @@ const Home = () => {
 
     return (
         <div>
+            <Banner></Banner>
             <h2 className='text-3xl font-bold'> Shop by Categories</h2>
             <div className='w-75 mx-auto text-center'>
             <Tabs > 
