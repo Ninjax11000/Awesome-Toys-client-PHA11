@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Banner from '../Banner/Banner';
+import Gallery from '../Gallery/Gallery';
 
 const Home = () => {
     
@@ -35,7 +36,8 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <h2 className='text-3xl font-bold'> Shop by Categories</h2>
+            <Gallery></Gallery>
+            <h2 className='text-4xl font-bold text-center my-7'> Shop by Categories</h2>
             <div className='w-75 mx-auto text-center'>
             <Tabs > 
                 <TabList>
