@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const AllToys = () => {
     const [allToys, setAllToys] = useState([]);
@@ -8,36 +9,45 @@ const AllToys = () => {
             .then(data => setAllToys(data))
     }, [])
     return (
-        <div>
-            <h2 className='text-5xl text-center font-bold my-5'> All Toys</h2>
-            <p className='text-center font-bold text-2xl'>{allToys.length}</p>
+        <div className='my-10'>
             <div className="overflow-x-auto">
-                <table className="table w-full">
-                    {/* head */}
+                <table className="table table-compact w-full">
                     <thead>
                         <tr>
-                            <th></th>
+                           
                             <th>Seller</th>
-                            <th>Toy Name</th>
-                            <th>Sub-Category</th>
+                            <th>Toy Name </th>
+                            <th>Sub Category</th>
                             <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Details</th>
+                            <th>Available Quantity</th>
+                            <th>View Details</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
-                        </tr>
-                       
+                       {
+                        allToys.map(toy=> <tr key={toy._id}>
+                            
+                            <td>{toy.seller.name}</td>
+                            <td>{toy.name}</td>
+                            <td>{toy.category}</td>
+                            <td>{toy.price}</td>
+                            <td>{toy.quantity}</td>
+                            <td><Link className='btn btn-primary' to={`/toy/${toy._id}`}>View Details</Link></td>
+                        </tr>)
+                       }
+                      
                     </tbody>
+                    <tfoot>
+                        <tr>
+                        
+                            <th>Seller</th>
+                            <th>Toy Name </th>
+                            <th>Sub Category</th>
+                            <th>Price</th>
+                            <th>Available Quantity</th>
+                            <th>View Details</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
 
