@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-
-    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { signIn,googleSignIn } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
 
     const handleLogin = event => {
         event.preventDefault();
@@ -26,6 +28,20 @@ const Login = () => {
             .catch(error => {
                 setError(error.message);
             })
+    }
+
+    const handleGoogleSignIn =()=>{
+        googleSignIn(googleProvider)
+        .then(result=>{
+            const loggedInUser=result.user;
+            console.log(loggedInUser);
+
+                navigate('/');
+            
+        })
+        .catch(error=>{
+            console.log('error', error.message);
+        })
     }
 
     return (
@@ -62,6 +78,7 @@ const Login = () => {
                         <p className='text-red-600'>{error}</p>
                         <p className='text-green-600'>{success}</p>
                     </div>
+                    <button onClick={handleGoogleSignIn} className='btn btn-primary'>Google Sign in</button>
                 </div>
             </div>
         </div>

@@ -1,7 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../providers/AuthProviders';
 
 const Navbar = () => {
+    const [isHovering, setIsHovering] = useState(false);
+    const handleName = () => {
+        setIsHovering(true);
+    }
+    const hideName = () => {
+        setIsHovering(false);
+    }
+
+    const { user, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch(error => console.log(error))
+        navigate('/');
+    }
     return (
         <div>
             <div className="navbar bg-cyan-600 text-neutral-content">
@@ -12,9 +29,13 @@ const Navbar = () => {
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
                         <li><Link to='/'>Home</Link></li>
-                        
+
                         <li><Link to='/blog'>Blogs</Link></li>
-                        <li><Link to='/login'>Login</Link></li>
+                        {user && <li><Link to='/addToy'>Add a Toy</Link></li>}
+                        {user && <li><Link to='/myToy' >My Toy</Link></li>}
+                        {user && isHovering && <h5 className='text-white mx-2 mt-3'>{user.displayName}</h5>}
+                        {user && <img onMouseOver={handleName} onMouseOut={hideName} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'white', margin: '5px' }} src={user.photoURL} alt="" />}
+                        {user ? <button className='btn btn-primary' onClick={handleLogOut}>Logout</button> : <Link className='btn btn-primary' to='/login'>Login</Link>}
                     </ul>
                 </div>
             </div>
