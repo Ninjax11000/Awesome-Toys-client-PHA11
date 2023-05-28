@@ -31,8 +31,9 @@ const Navbar = () => {
                         <li><Link to='/'>Home</Link></li>
 
                         <li><Link to='/blog'>Blogs</Link></li>
+                        <li><Link to='/allToys'>All Toys</Link></li>
                         {user && <li><Link to='/addToy'>Add a Toy</Link></li>}
-                        {user && <li><Link to='/myToy' >My Toy</Link></li>}
+                        {user && <li><Link to='/myToy' >My Toys</Link></li>}
                         {user && isHovering && <h5 className='text-white mx-2 mt-3'>{user.displayName}</h5>}
                         {user && <img onMouseOver={handleName} onMouseOut={hideName} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'white', margin: '5px' }} src={user.photoURL} alt="" />}
                         {user ? <button className='btn btn-primary' onClick={handleLogOut}>Logout</button> : <Link className='btn btn-primary' to='/login'>Login</Link>}
