@@ -7,7 +7,7 @@ const SingleToy = () => {
     //    console.log(id);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/toys/${id}`)
+        fetch(`https://toy-market-server-nu.vercel.app/toys/${id}`)
             .then(res => res.json())
             .then(data => setToy(data))
     }, [])

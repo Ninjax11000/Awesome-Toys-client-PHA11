@@ -13,22 +13,22 @@ const Home = () => {
     const [regularCar, setregularCar] = useState([]);
     const [truck, setTruck] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allToys/sportsCar')
+        fetch('https://toy-market-server-nu.vercel.app/allToys/sportsCar')
             .then(res => res.json())
             .then(data => setsportsCar(data))
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/allToys/policeCar')
+        fetch('https://toy-market-server-nu.vercel.app/allToys/policeCar')
             .then(res => res.json())
             .then(data => setpoliceCar(data))
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/allToys/regularCar')
+        fetch('https://toy-market-server-nu.vercel.app/allToys/regularCar')
             .then(res => res.json())
             .then(data => setregularCar(data))
     }, [])
     useEffect(() => {
-        fetch('http://localhost:5000/allToys/truck')
+        fetch('https://toy-market-server-nu.vercel.app/allToys/truck')
             .then(res => res.json())
             .then(data => setTruck(data))
     }, [])
