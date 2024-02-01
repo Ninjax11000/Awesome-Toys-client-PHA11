@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 
 const AuthProviders = ({children}) => {
@@ -24,7 +25,8 @@ const AuthProviders = ({children}) => {
             displayName: name, photoURL: photo
         })
     }
-    const googleSignIn =(googleProvider)=>{
+    const googleSignIn =()=>{
+        setLoading(true);
         return signInWithPopup(auth,googleProvider);
     }
     const logOut = () => {
@@ -35,6 +37,30 @@ const AuthProviders = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, loggedUser => {
             setUser(loggedUser);
             setLoading(false);
+            
+            if(loggedUser && loggedUser.email)
+            {
+                const currentUser={
+                    email: loggedUser.email,
+                }
+                fetch('https://toy-market-server-nu.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify( currentUser )
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log('jwt response', data);
+                        localStorage.setItem('access-token', data.token);
+                       
+                       
+                    })
+            }
+            else{
+                localStorage.removeItem('access-token');
+            }
         })
         return () => {
             unsubscribe();

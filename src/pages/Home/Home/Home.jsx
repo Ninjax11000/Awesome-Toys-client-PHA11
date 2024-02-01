@@ -1,97 +1,138 @@
 import React, { useEffect, useState } from 'react';
-import ToysCard from '../ToyCard/ToysCard';
+// import ToysCard from '../ToyCard/ToysCard';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import Banner from '../Banner/Banner';
+
 import Gallery from '../Gallery/Gallery';
+import Banner from '../../Shared/Banner/Banner';
+import ToysCard from '../../Shared/ToyCard/ToysCard';
+import Lottie from "lottie-react";
+import gallery from './Animation1.json';
+import FeedBack from '../FeedBack/FeedBack';
 
 const Home = () => {
-    
-    const [sportsCar, setsportsCar] = useState([]);
-    const [policeCar, setpoliceCar] = useState([]);
-    const [regularCar, setregularCar] = useState([]);
-    const [truck, setTruck] = useState([]);
+
+    const [toys, setToys] = useState([]);
+    const [showAll, setShowAll]=useState(false);
+
+    const [category, setCategory] = useState('Action Figures');
+
+
     useEffect(() => {
-        fetch('https://toy-market-server-nu.vercel.app/allToys/sportsCar')
+        fetch(`https://toy-market-server-nu.vercel.app/allToys/${category}`)
             .then(res => res.json())
-            .then(data => setsportsCar(data))
-    }, [])
-    useEffect(() => {
-        fetch('https://toy-market-server-nu.vercel.app/allToys/policeCar')
-            .then(res => res.json())
-            .then(data => setpoliceCar(data))
-    }, [])
-    useEffect(() => {
-        fetch('https://toy-market-server-nu.vercel.app/allToys/regularCar')
-            .then(res => res.json())
-            .then(data => setregularCar(data))
-    }, [])
-    useEffect(() => {
-        fetch('https://toy-market-server-nu.vercel.app/allToys/truck')
-            .then(res => res.json())
-            .then(data => setTruck(data))
-    }, [])
+            .then(data => {
+                console.log(data);
+                setToys(data);
+            })
+    }, [category])
+    const handleShowAll = ()=>{
+        setShowAll(true);
+    }
 
     return (
         <div>
             <Banner></Banner>
+            <div className='flex flex-col md:flex-row justify-center items-center'> 
+                <h2 className="text-4xl font-bold my-9">Gallery</h2>
+                <Lottie animationData={gallery} style={{ height: 300, width: 300, }}></Lottie>
+            </div>
             <Gallery></Gallery>
-            <h2 className='text-4xl font-bold text-center my-7'> Shop by Categories</h2>
+            <h2 className='text-4xl font-bold text-center m-4 p-4'> Shop by Categories</h2>
             <div className='w-75 mx-auto text-center'>
-            <Tabs > 
-                <TabList>
-                    <Tab>Sports Car</Tab>
-                    <Tab>Police Car</Tab>
-                    <Tab>Regular Car</Tab>
-                    <Tab>Truck</Tab>
-                </TabList>
+                <Tabs >
+                    <TabList>
+                        <Tab onClick={() => {
+                            setCategory('Action Figures');
+                            setShowAll(false); 
+                            }}><span className='font-bold'>Action Figures</span></Tab>
+                        <Tab onClick={() =>{
+                            setCategory('Toy Cars');
+                            setShowAll(false);
+                        } }><span className='font-bold'>Toy Cars</span></Tab>
+                        <Tab onClick={() => {
+                            setCategory('Animal Toys');
+                            setShowAll(false);
+                        }}><span className='font-bold'>Animal Toys</span></Tab>
+                        <Tab onClick={() => {
+                            setCategory('Disney Toys');
+                            setShowAll(false);
+                        }}><span className='font-bold'>Disney Toys</span></Tab>
+                    </TabList>
 
-                <TabPanel>
-                    <h2> number of items: {sportsCar.length}</h2>
-                    {
-                        sportsCar.map(toy => <ToysCard
-                            key={toy._id}
-                            toy={toy}
+                    <TabPanel>
+                        <h2 className='text-2xl'>Total Items: {toys.length}</h2>
+                        <div className='grid md:grid-cols-3 gap-6'>
+                            {
+                                toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
+                                    key={toy._id}
+                                    toy={toy}
 
-                        ></ToysCard>)
-                    }
-                </TabPanel>
-                <TabPanel>
-                    <h2> number of items:{policeCar.length}</h2>
-                    {
-                        policeCar.map(toy => <ToysCard
-                            key={toy._id}
-                            toy={toy}
+                                ></ToysCard>)
+                            }
+                        </div>
+                        {
+                            (!showAll && toys.length>6) ? <><button onClick={handleShowAll} className='btn btn-error font-bold my-3'>Show All</button></>:<></>
+                        }
 
-                        ></ToysCard>)
-                    }
-                </TabPanel>
-                <TabPanel>
-                    <h2>number of items: {regularCar.length}</h2>
-                    {
-                        regularCar.map(toy => <ToysCard
-                            key={toy._id}
-                            toy={toy}
+                    </TabPanel>
+                    <TabPanel>
+                        <h2 className='text-2xl'>Total Items: {toys.length}</h2>
+                        <div className='grid grid-cols-3 gap-6'>
+                        {
+                                toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
+                                    key={toy._id}
+                                    toy={toy}
 
-                        ></ToysCard>)
-                    }
-                </TabPanel>
-                <TabPanel>
-                    <h2> number of items:{truck.length}</h2>
-                    {
-                        truck.map(toy => <ToysCard
-                            key={toy._id}
-                            toy={toy}
+                                ></ToysCard>)
+                            }
+                        </div>
+                        {
+                            (!showAll && toys.length>6) ? <><button onClick={handleShowAll} className='btn btn-error font-bold my-3'>Show All</button></>:<></>
+                        }
 
-                        ></ToysCard>)
-                    }
-                </TabPanel>
-            </Tabs>
+                    </TabPanel>
+                    <TabPanel>
+                        <h2 className='text-2xl'>Total Items: {toys.length}</h2>
+                        <div className='grid grid-cols-3 gap-6'>
+                        {
+                                toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
+                                    key={toy._id}
+                                    toy={toy}
+
+                                ></ToysCard>)
+                            }
+                        </div>
+                        {
+                            (!showAll && toys.length>6) ? <><button onClick={handleShowAll} className='btn btn-error font-bold my-3'>Show All</button></>:<></>
+                        }
+
+                    </TabPanel>
+                    <TabPanel>
+                        <h2 className='text-2xl'>Total Items: {toys.length}</h2>
+                        <div className='grid grid-cols-3 gap-6'>
+                        {
+                                toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
+                                    key={toy._id}
+                                    toy={toy}
+
+                                ></ToysCard>)
+                            }
+                        </div>
+                        {
+                            (!showAll && toys.length>6) ? <><button onClick={handleShowAll} className='btn btn-error font-bold my-3'>Show All</button></>:<></>
+                        }
+
+                    </TabPanel>
+                </Tabs>
             </div>
 
-           
+            <FeedBack></FeedBack>
+
+
         </div>
+
     );
 };
 

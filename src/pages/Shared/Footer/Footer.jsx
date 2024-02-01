@@ -1,11 +1,12 @@
 import React from 'react';
+import bg3 from '/footer2.jpg';
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="footer p-10 bg-base-200 text-base-content">
-                <div>
-                    <img className='w-14 h-14' src="/soccer-ball-42427.png" alt="" />
+        
+            <footer className="footer p-10 bg-base-200 text-base-content"style={{ backgroundImage: `url(${bg3})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <div className='font-bold'>
+                    <img className='w-14 h-14' src="/logo.png" alt="" />
                     <p>Awesome Toys Ltd.<br />Providing awesome toys since 1992</p>
                 </div>
                 <div>
@@ -27,7 +28,7 @@ const Footer = () => {
                     <a className="link link-hover">Cookie policy</a>
                 </div>
             </footer>
-        </div>
+        
     );
 };
 
