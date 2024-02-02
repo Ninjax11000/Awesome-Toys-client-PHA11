@@ -35,7 +35,7 @@ const Gallery = () => {
    
    
     return (
-        <div className='bg-yellow-500 border-2 border-slate-500 rounded-md py-3'>
+        <div  className='bg-yellow-500 border-2 border-slate-500 rounded-md py-3'>
             
             <ImageGallery items={images} slideOnThumbnailOver/>
         </div>

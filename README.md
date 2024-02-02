@@ -4,6 +4,7 @@
 * Mongodb CRUD operations (Product managment)
 * JWT 
 * React tabs
+* Animate On Scroll Library
 * Controlled Component on registration page
 * Pagination
 * Searching

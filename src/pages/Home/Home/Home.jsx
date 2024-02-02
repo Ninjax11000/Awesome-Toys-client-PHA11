@@ -10,8 +10,13 @@ import ToysCard from '../../Shared/ToyCard/ToysCard';
 import Lottie from "lottie-react";
 import gallery from './Animation1.json';
 import FeedBack from '../FeedBack/FeedBack';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
+    useEffect(()=>{
+        Aos.init();
+    },[])
 
     const [toys, setToys] = useState([]);
     const [showAll, setShowAll]=useState(false);
@@ -34,13 +39,15 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div className='flex flex-col md:flex-row justify-center items-center'> 
+            <div className='flex flex-col md:flex-row justify-center items-center' data-aos="fade-left"  data-aos-duration="2000"> 
                 <h2 className="text-4xl font-bold my-9">Gallery</h2>
                 <Lottie animationData={gallery} style={{ height: 300, width: 300, }}></Lottie>
             </div>
+            <div data-aos="fade-right" data-aos-duration="2000">
             <Gallery></Gallery>
-            <h2 className='text-4xl font-bold text-center m-4 p-4'> Shop by Categories</h2>
-            <div className='w-75 mx-auto text-center'>
+            </div>
+            <h2 className='text-4xl font-bold text-center my-10 py-4'> Shop by Categories</h2>
+            <div className='w-75 mx-auto text-center ' data-aos="zoom-in-left" >
                 <Tabs >
                     <TabList>
                         <Tab onClick={() => {
@@ -127,8 +134,11 @@ const Home = () => {
                     </TabPanel>
                 </Tabs>
             </div>
+            <div data-aos="flip-left" data-aos-duration="1500">
+            <FeedBack  ></FeedBack>
+            </div>
 
-            <FeedBack></FeedBack>
+           
 
 
         </div>
