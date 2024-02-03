@@ -47,7 +47,7 @@ const Home = () => {
             <Gallery></Gallery>
             </div>
             <h2 className='text-4xl font-bold text-center my-10 py-4'> Shop by Categories</h2>
-            <div className='w-75 mx-auto text-center ' data-aos="zoom-in-left" >
+            <div className='w-75 mx-auto my-5 text-center ' data-aos="zoom-in-left" >
                 <Tabs >
                     <TabList>
                         <Tab onClick={() => {
@@ -86,7 +86,7 @@ const Home = () => {
                     </TabPanel>
                     <TabPanel>
                         <h2 className='text-2xl'>Total Items: {toys.length}</h2>
-                        <div className='grid grid-cols-3 gap-6'>
+                        <div className='grid md:grid-cols-3 gap-6'>
                         {
                                 toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
                                     key={toy._id}
@@ -102,7 +102,7 @@ const Home = () => {
                     </TabPanel>
                     <TabPanel>
                         <h2 className='text-2xl'>Total Items: {toys.length}</h2>
-                        <div className='grid grid-cols-3 gap-6'>
+                        <div className='grid md:grid-cols-3 gap-6'>
                         {
                                 toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
                                     key={toy._id}
@@ -118,7 +118,7 @@ const Home = () => {
                     </TabPanel>
                     <TabPanel>
                         <h2 className='text-2xl'>Total Items: {toys.length}</h2>
-                        <div className='grid grid-cols-3 gap-6'>
+                        <div className='grid md:grid-cols-3 gap-6'>
                         {
                                 toys.slice(0, showAll? toys.length:6).map(toy => <ToysCard
                                     key={toy._id}
@@ -134,8 +134,10 @@ const Home = () => {
                     </TabPanel>
                 </Tabs>
             </div>
-            <div data-aos="flip-left" data-aos-duration="1500">
-            <FeedBack  ></FeedBack>
+
+            <div data-aos="flip-left" data-aos-duration="1500" className='my-10'>
+            <h3 className="text-4xl font-bold my-10 text-center">What our Customers say!</h3>
+            <FeedBack></FeedBack>
             </div>
 
            

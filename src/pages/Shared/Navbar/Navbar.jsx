@@ -57,8 +57,8 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                
-                        {user && isHovering && <h5 className='text-black mx-2 mt-1'>{user.displayName}</h5>}
-                        {user && <img onMouseOver={handleName} onMouseOut={hideName} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'white', margin: '5px' }} src={user.photoURL} alt="" />}
+                        {user && isHovering && <h5 className='text-black mx-2 mt-1 '>{user.displayName}</h5>}
+                        {user && <img className='hidden lg:block' onMouseOver={handleName} onMouseOut={hideName} style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'white', margin: '5px' }} src={user.photoURL} alt="" />}
                         {user ? <button className='btn btn-warning' onClick={handleLogOut}>Logout</button> : <Link className='btn btn-warning' to='/login'>Login</Link>}
                 </div>
             </div>

@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 const FeedBack = () => {
     return (
         <div className='my-5' >
-            <h3 className="text-3xl font-bold my-5 text-center">What our Customers say!</h3>
+          
 
             <Swiper
                 spaceBetween={30}

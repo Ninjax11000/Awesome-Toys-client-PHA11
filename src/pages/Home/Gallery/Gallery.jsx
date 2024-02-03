@@ -6,8 +6,8 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 const images = [
   {
-    original: "https://i.ibb.co/1ZbWkST/trex1.jpg",
-    thumbnail: "https://i.ibb.co/1ZbWkST/trex1.jpg",
+    original: "https://i.ibb.co/bHHV7YM/Buzz1.jpg",
+    thumbnail: "https://i.ibb.co/bHHV7YM/Buzz1.jpg",
   },
   {
     original: "https://i.ibb.co/QkSYMXD/Spiderman.jpg",
@@ -18,8 +18,8 @@ const images = [
     thumbnail: "https://i.ibb.co/mvcb59C/Optimus.jpg",
   },
   {
-    original: "https://i.ibb.co/MnDQ7nH/Horse.jpg",
-    thumbnail: "https://i.ibb.co/MnDQ7nH/Horse.jpg",
+    original: "https://i.ibb.co/r2fgFqx/Bear1.jpg",
+    thumbnail: "https://i.ibb.co/r2fgFqx/Bear1.jpg",
   },
   {
     original: "https://i.ibb.co/dMn2byL/Captain1.jpg",
